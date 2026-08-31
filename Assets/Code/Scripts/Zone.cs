@@ -44,9 +44,18 @@ public class Zone : MonoBehaviour
             {
                 if (currentMapObjectSprite.popup.isActiveAndEnabled)
                 {
+                    PlaytestAnalytics.Track(
+                        $"Close Object Menu: {currentObject.Name} @ {zone}"
+                    );
+
                     currentMapObjectSprite.popup.Disable();
                     return;
                 }
+
+                PlaytestAnalytics.Track(
+                    $"Open Object Menu: {currentObject.Name} @ {zone}"
+                );
+
                 string action = MapObjectDatabase.instance.ActionsDictionary
                     .Where(x => x.Key.Item2 == currentObject.Name)
                     .Select(x => x.Key.Item1)
@@ -102,32 +111,77 @@ public class Zone : MonoBehaviour
     {
         if (GameManager.instance.CurrentMaterial != null)
         {
-            if (MapObjectDatabase.instance.ZoneDictionary.TryGetValue((zone, GameManager.instance.CurrentMaterial.Name), out MapObject mapObject))
+            Material material =
+                GameManager.instance.CurrentMaterial;
+
+            PlaytestAnalytics.Track(
+                $"Use Material: {material.Name} @ {zone}"
+            );
+
+            if (MapObjectDatabase.instance.ZoneDictionary.TryGetValue(
+                (zone, material.Name),
+                out MapObject mapObject))
+            {
                 ChangeMapObject(mapObject);
-        }        
+            }
+            else
+            {
+                PlaytestAnalytics.Track(
+                    $"Invalid Material: {material.Name} @ {zone}"
+                );
+            }
+        }
     }
 
     private void CombineMapObjectWithMaterial()
     {
-        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue((GameManager.instance.CurrentMaterial.Name, currentObject.Name), out MapObject mapObject))
-           ChangeMapObject(mapObject);
+        Material material =
+            GameManager.instance.CurrentMaterial;
+
+        PlaytestAnalytics.Track(
+            $"Use Material: {material.Name} @ {zone} " +
+            $"on {currentObject.Name}"
+        );
+
+        if (MapObjectDatabase.instance.CombinationDictionary.TryGetValue(
+            (material.Name, currentObject.Name),
+            out MapObject mapObject))
+        {
+            ChangeMapObject(mapObject);
+        }
+        else
+        {
+            PlaytestAnalytics.Track(
+                $"Invalid Material: {material.Name} @ {zone} " +
+                $"on {currentObject.Name}"
+            );
+        }
     }
 
     private void PerformActionOnMapObject(string action)
     {
+        PlaytestAnalytics.Track(
+            $"Use Action: {action} @ {zone} on {currentObject.Name}"
+        );
 
-        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue((action, currentObject.Name), out List<MapObject> mapObjects))
+        if (MapObjectDatabase.instance.ActionsDictionary.TryGetValue(
+            (action, currentObject.Name),
+            out List<MapObject> mapObjects))
         {
             if (mapObjects.Count > 1)
             {
-                MapUI.instance.DisplayObjectSelectScreen(mapObjects, OnObjectSelected);
+                MapUI.instance.DisplayObjectSelectScreen(
+                    mapObjects,
+                    OnObjectSelected
+                );
             }
-            else 
+            else
             {
-                OnObjectSelected(mapObjects[0].Name);          
-            }        
-        }      
+                OnObjectSelected(mapObjects[0].Name);
+            }
+        }
     }
+
     private void OnObjectSelected(string objectName)
     {
         MapObject mapObject = MapObjectDatabase.instance.MapObjectDictionary[objectName];
@@ -160,6 +214,10 @@ public class Zone : MonoBehaviour
 
     private void RecycleMapObject(MapObject mapObject)
     {
+        PlaytestAnalytics.Track(
+            $"Result: Recycle {currentObject.Name} " +
+            $"-> Stored {mapObject.HarvestedMaterial.Name} @ {zone}"
+        );
         GameManager.instance.ChangeStoredMaterialAmount(mapObject.HarvestedMaterial, 1);
         GameManager.instance.objectHistory.Push((currentObject, this));
         Destroy(currentMapObjectSprite.gameObject);
@@ -168,10 +226,20 @@ public class Zone : MonoBehaviour
         UnHighlightObject();
         currentMapObjectSprite.popup.Disable();
     }
+
     private void ChangeMapObject(MapObject mapObject)
     {
         if (mapObject != null)
         {
+            string previousObject =
+                currentObject != null
+                    ? currentObject.Name
+                    : "Empty";
+
+            PlaytestAnalytics.Track(
+                $"Result: {previousObject} -> {mapObject.Name} @ {zone}"
+            );
+
             if (currentObject == null)
                 currentMapObjectSprite = Instantiate(mapObjectPrefab, transform);
 

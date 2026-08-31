@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
+  m_Name: Young Tree
+  m_EditorClassIdentifier: 
+  Name: Sapling
+  Image: {fileID: 1926870129859987553, guid: bfa657455b5e93343b52ad8d037f5cc3, type: 3}
+  image: {fileID: 21300000, guid: 1a4841018252fe74aab232760c1a1426, type: 3}
+  RequiredMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
+  RequiredZone: 2
+  RequiredAction: {fileID: 0}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}

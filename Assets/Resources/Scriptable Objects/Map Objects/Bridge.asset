@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
+  m_Name: Bridge
+  m_EditorClassIdentifier: 
+  Name: Bridge
+  Image: {fileID: 3750869250080632973, guid: df63507ab1d1aa542b9cbeb80d0c0566, type: 3}
+  image: {fileID: 21300000, guid: 599d4dd6f54c9a5458e7f6cc7f18eb36, type: 3}
+  RequiredMapObject: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
+  RequiredZone: 1
+  RequiredAction: {fileID: 0}
+  RequiredStoredMaterial: {fileID: 0}
+  RequiredStoredMaterialAmount: 0
+  HarvestedMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
+  isFinalForm: 0

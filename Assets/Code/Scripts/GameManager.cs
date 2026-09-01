@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     {
         if (inputTracker.TimeSinceLastInput > inputTracker.ResetTimer)
         {
+            PlaytestAnalytics.Track(
+                "System: Inactivity Reset"
+            );
+
             ResetScene();
         }
 

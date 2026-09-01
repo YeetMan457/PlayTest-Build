@@ -24,7 +24,7 @@ public class HistoryWindow : MonoBehaviour
         
     }
 
-    internal void CreatePreviousHistory(HistoryItem historyItem, Transform parent, Material? requiredStoredMaterial = null)
+    internal void CreatePreviousHistory(HistoryItem historyItem, Transform parent, Material requiredStoredMaterial = null)
     {
         
         GameObject icon = Instantiate(objectIcon, parent);

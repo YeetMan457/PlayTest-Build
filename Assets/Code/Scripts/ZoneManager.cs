@@ -28,7 +28,7 @@ public class ZoneManager : MonoBehaviour
         
     }
 
-    public void HighlightObject(Material? material = null, Action? action = null)
+    public void HighlightObject(Material material = null, Action action = null)
     {
         foreach (Zone zone in zones)
         {

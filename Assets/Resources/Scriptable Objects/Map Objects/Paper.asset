@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Paper
   m_EditorClassIdentifier: 
   Name: Paper
-  Image: {fileID: 1410548041250086906, guid: acf5bc30c5afcf84b94d6358bd04ad2c, type: 3}
-  image: {fileID: 21300000, guid: 66c45e26e5d6b4b4b9c8b20ca7bca8d0, type: 3}
+  image: {fileID: 21300000, guid: 359883e69382b9f48b9c2e56743fffa7, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 68c4f36198dda134c925f575620075d4, type: 2}
-  RequiredMaterial: {fileID: 0}
+  RequiredMaterial: {fileID: 11400000, guid: 50204db7b4c414845b98601c6c04c340, type: 2}
   RequiredZone: 3
-  RequiredAction: {fileID: 11400000, guid: 9ef5e037038a3134b81b7bf1f635b338, type: 2}
+  RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
   isFinalForm: 0
+  creationSound: {fileID: 8300000, guid: 87cf4a034aa4dd740ac2adb01871ec30, type: 3}

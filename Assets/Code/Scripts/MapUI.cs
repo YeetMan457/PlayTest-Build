@@ -6,12 +6,14 @@ using UnityEngine;
 public class MapUI : MonoBehaviour
 {
     public HistoryWindow historyWindow;
+    public GameObject optionsMenu;
     public ObjectSelectScreen objectSelectScreen;
     public GameObject finalFormWindow;
     bool finalFormWindowActive = false;
     public static MapUI instance;
     public GameObject blocker;
     public Canvas canvas;
+    public HistoryWindow historyWindowPrefab;
 
     void Awake()
     {
@@ -28,9 +30,11 @@ public class MapUI : MonoBehaviour
     }
     public void DisplayHistoryWindow(MapObject mapObject)
     {
-        blocker.SetActive(true);
-        HistoryWindow window = Instantiate(historyWindow, canvas.transform);
-        window.CreateHistory(mapObject);
+        if (historyWindow != null)
+            Destroy(historyWindow.gameObject);
+        //blocker.SetActive(true);
+        historyWindow = Instantiate(historyWindowPrefab, canvas.transform);
+        historyWindow.CreateHistory(mapObject);
     }
 
     public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)
@@ -50,7 +54,11 @@ public class MapUI : MonoBehaviour
         }
         
     }
-
+    public void DisplayOptionsMenu()
+    {
+        blocker.SetActive(true);
+        optionsMenu.SetActive(true);
+    }
     public void HideFinalFormWindow()
     {
         if (finalFormWindowActive == true)

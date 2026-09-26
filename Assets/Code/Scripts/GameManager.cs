@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,14 +12,20 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public Action CurrentAction;
 
-    public Dictionary<string, int> materialCounts;
+    public int currentRecycledWaste;
     public StorageUI storageUi;
     public InputTracker inputTracker;
     public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
-    public AudioSource currentMusic;
-    int currentTrack;
+    
     public List<AudioClip> gameMusic;
+    public HashSet<string> goalItems = new();
+    public HashSet<string> completedGoalItems = new();
+    public bool goalItemsFinished = false;
+    public GoalItemUI goalItemUI;
+
+    [SerializeField] private InputAction mouseClick;
+    [HideInInspector] public bool IsMoving = false;
     void Awake()
     {
 
@@ -29,8 +36,12 @@ public class GameManager : MonoBehaviour
         else if (instance != this)
 
             Destroy(gameObject);
-        PlayMusic();
 
+
+    }
+    void Start()
+    {
+        AudioManager.instance.ChangeMusic(SceneManager.GetActiveScene());
     }
     void Update()
     {
@@ -47,21 +58,9 @@ public class GameManager : MonoBehaviour
         {
             ResetCurrentAction();
         }
-        if (!currentMusic.isPlaying)
-        {
-            currentTrack++;
-            if (currentTrack >= gameMusic.Count)
-                currentTrack = 0;
-            currentMusic.clip = gameMusic[currentTrack];
-            currentMusic.Play();
-        }
+        
     }
-    public void PlayMusic()
-    {
-        currentMusic.clip = gameMusic[0];
-        currentTrack = 0;
-        currentMusic.Play();
-    }
+    
     public void SetCurrentMaterial(Material material)
     {
         ZoneManager.instance.UnHighlightObject();
@@ -98,15 +97,36 @@ public class GameManager : MonoBehaviour
 
     public bool HasRequiredMatierals(MapObject mapObject)
     {
-        if (materialCounts[mapObject.RequiredStoredMaterial.Name] >= mapObject.RequiredStoredMaterialAmount)
+        if (currentRecycledWaste >= mapObject.RequiredStoredMaterialAmount)
             return true;
         else
             return false;
     }
 
-    public void ChangeStoredMaterialAmount(Material material, int amount)
+    public void ChangeStoredMaterialAmount(int amount)
     {
-        materialCounts[material.Name] += amount;
-        storageUi.ChangeStorageAmount(material.Name);
+        currentRecycledWaste += amount;
+        storageUi.ChangeStorageAmount();
+    }
+
+    internal void AddCompletedItem(string name)
+    {
+        if (!completedGoalItems.Contains(name))
+        {
+            completedGoalItems.Add(name);
+            Destroy(goalItemUI.finalFormButtons[name].gameObject);
+            if (completedGoalItems.Count == goalItems.Count)
+            {
+                goalItemsFinished = true;
+                goalItemUI.CreateFinalItems();
+            }
+                
+        }
+    }
+
+    public void RecycleItem(Material material, GameObject gameObject)
+    {
+        TextPopup popup = Popup.instance.ShowText(gameObject, $"+1 <sprite name=\"Waste edit\">");
+        ChangeStoredMaterialAmount(1);     
     }
 }

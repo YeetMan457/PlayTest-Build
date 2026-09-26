@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ZoneManager : MonoBehaviour
 {
     public Zone[] zones;
     public static ZoneManager instance = null;
+    public IslandDecorate decorationArea;
+    private AudioHandle creationSoundHandle;
+    public FinalFormUi finalFormUi;
     void Awake()
     {
 
@@ -28,7 +32,7 @@ public class ZoneManager : MonoBehaviour
         
     }
 
-    public void HighlightObject(Material material = null, Action action = null)
+    public void HighlightObject(Material? material = null, Action? action = null)
     {
         foreach (Zone zone in zones)
         {
@@ -41,6 +45,39 @@ public class ZoneManager : MonoBehaviour
         foreach (Zone zone in zones)
         {
             zone.UnHighlightObject();
+        }
+    }
+
+
+    internal void PlaceItemOnIsland(MapObject mapObject)
+    {
+        decorationArea.PlaceItemOnIsland(mapObject);
+
+    }
+
+    public void PlayCreationSound(MapObject mapObject)
+    {
+        StopSound();
+        creationSoundHandle = AudioManager.instance.PlaySound(mapObject.creationSound, transform.position);
+    }
+    
+    public void StopSound()
+    {
+        creationSoundHandle?.Stop();
+        creationSoundHandle = null;
+
+    }
+
+    internal void MarkItemAsBuilt(string name)
+    {
+        finalFormUi.MarkItemAsComplete(name);
+    }
+
+    public void ToggleRedZones(bool enabled)
+    {
+        foreach (Zone zone in zones)
+        {
+            zone.redZone.SetActive(enabled);
         }
     }
 }

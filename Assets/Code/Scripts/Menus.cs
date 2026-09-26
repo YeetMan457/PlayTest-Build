@@ -12,6 +12,7 @@ public class Menus : MonoBehaviour
     public GameObject mainMenu;
     public GameObject helpMenu;
     public GameObject optionsMenu;
+    public GameObject gameMenu;
 
     [Header("SCENES")]
     public string gameScene = "Game";
@@ -90,6 +91,17 @@ public class Menus : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
+    }
+    // =========================================================
+    // Game MENU
+    // =========================================================
+
+    public void ToggleGameMenu()
+    {
+        if (gameMenu.activeSelf)
+            gameMenu.SetActive(false);
+        else
+            gameMenu.SetActive(true);
     }
 
     // =========================================================

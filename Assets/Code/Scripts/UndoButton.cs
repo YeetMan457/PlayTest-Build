@@ -9,6 +9,10 @@ public class UndoButton : MonoBehaviour
         {
             history.Item2.Undo(history.Item1);
             GameManager.instance.objectHistory.Pop();
+
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.FirstUndo
+            );
         }
     }
 }

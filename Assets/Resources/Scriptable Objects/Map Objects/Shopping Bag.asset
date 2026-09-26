@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Shopping Bag
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Shopping Bag
-  image: {fileID: 21300000, guid: 966210daeb2206243a8c82f71199ad25, type: 3}
+  image: {fileID: 21300000, guid: e05da2e2def85804da886d7ac96faf17, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 849092affc70b2b418ed5348308860c7, type: 2}
   RequiredMaterial: {fileID: 0}
-  RequiredZone: 3
+  RequiredZone: 2
   RequiredAction: {fileID: 11400000, guid: d0beaf1549b6460439b032be2ec0c181, type: 2}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
   isFinalForm: 1
+  creationSound: {fileID: 0}

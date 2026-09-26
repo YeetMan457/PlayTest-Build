@@ -17,7 +17,7 @@ public class PlaytestAnalytics : MonoBehaviour
 
     [Header("Playtest")]
     [SerializeField]
-    private string buildVersion = "Play Test 1";
+    private string buildVersion = "Play Test 2";
 
     [Header("Consent")]
     [Tooltip(

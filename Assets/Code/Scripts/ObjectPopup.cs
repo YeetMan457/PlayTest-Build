@@ -1,3 +1,4 @@
+using LitMotion.Animation;
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class ObjectPopup : MonoBehaviour
     public GameObject history;
     public GameObject recycle;
     public GameObject action;
+    public LitMotionAnimation historyAnimation;
+    public LitMotionAnimation actionAnimation;
+    public LitMotionAnimation recycleAnimation;
 
     private System.Action onHistory;
     private System.Action onAction;
@@ -23,8 +27,8 @@ public class ObjectPopup : MonoBehaviour
         onHistory = historyCallback;
         onAction = actionCallback;
         onRecycle = recycleCallback;
-
-        if (actionText != null)
+        
+        if (actionText != null && actionText != "Recycle")
         {
             action.SetActive(true);
             action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
@@ -34,6 +38,24 @@ public class ObjectPopup : MonoBehaviour
         {
             action.SetActive(false);
         }
+        if (historyAnimation != null)
+        {
+            historyAnimation.Stop();
+            historyAnimation.Play();
+        }
+        if (actionAnimation != null)
+        {
+            actionAnimation.Stop();
+            actionAnimation.Play();
+        }
+
+        if (recycleAnimation != null)
+        {
+            recycleAnimation.Stop();
+            recycleAnimation.Play();
+        }
+
+
     }
 
     public void Disable()

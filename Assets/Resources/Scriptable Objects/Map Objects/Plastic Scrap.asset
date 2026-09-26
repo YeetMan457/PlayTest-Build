@@ -16,9 +16,9 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: bf6d107e69145b84eb3dd64a5bdf813e, type: 3}
   RequiredMapObject: {fileID: 0}
   RequiredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
-  RequiredZone: 1
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
   HarvestedMaterial: {fileID: 0}
   isFinalForm: 0
+  creationSound: {fileID: 8300000, guid: 72f85129fd3d109429d903804cf1126a, type: 3}

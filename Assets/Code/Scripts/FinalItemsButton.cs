@@ -7,6 +7,7 @@ public class FinalItemsButton : MonoBehaviour
     void Start()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
+        gameObject.SetActive(false);
     }
     public void OnClick()
     {
@@ -19,6 +20,10 @@ public class FinalItemsButton : MonoBehaviour
         {
             MapUI.instance.DisplayFinalFormWindow();
             text.text = "Hide Final Items";
+
+            TutorialPromptManager.ShowOnce(
+                TutorialPromptId.FirstFinalItemsOpened
+            );
         }
         
     }

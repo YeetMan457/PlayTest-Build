@@ -21,8 +21,8 @@ public class ObjectSelectScreen : MonoBehaviour
             objectSelectItem.mapObject = mapObject.Name;
             if (mapObject.RequiredStoredMaterial != null)
             {
-                objectSelectItem.text.text += $"\n Requires 1 recycled {mapObject.RequiredStoredMaterial.Name}";
-                if (mapObject.RequiredStoredMaterialAmount > GameManager.instance.materialCounts[mapObject.RequiredStoredMaterial.Name])
+                objectSelectItem.text.text += $"\n Requires {mapObject.RequiredStoredMaterialAmount} <sprite name=\"Waste edit\">";
+                if (mapObject.RequiredStoredMaterialAmount > GameManager.instance.currentRecycledWaste)
                      objectSelectItem.button.interactable = false;
             }
         }
@@ -31,6 +31,13 @@ public class ObjectSelectScreen : MonoBehaviour
     private void SelectObject(string objectName)
     {
         onSelected?.Invoke(objectName);
+        MapUI.instance.blocker.SetActive(false);
+        Destroy(this.gameObject);
+    }
+
+    public void OnCloseButtonClick()
+    {
+        onSelected?.Invoke(null);
         MapUI.instance.blocker.SetActive(false);
         Destroy(this.gameObject);
     }

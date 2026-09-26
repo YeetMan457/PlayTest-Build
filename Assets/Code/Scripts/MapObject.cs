@@ -8,13 +8,14 @@ public class MapObject : HistoryItem
  
     public MapObject RequiredMapObject;
     public Material RequiredMaterial;
-    public ZoneEnum RequiredZone;
+    //public ZoneEnum RequiredZone;
     public Action RequiredAction;
     public Material RequiredStoredMaterial;
     public int RequiredStoredMaterialAmount;
     public Material HarvestedMaterial;
     public List<HistoryItem> createdFrom;
     public bool isFinalForm;
+    public AudioClip creationSound;
 
     public MapObject(MapObjectSO SO)
     {
@@ -32,7 +33,7 @@ public class MapObject : HistoryItem
             RequiredMaterial = new Material(SO.RequiredMaterial);
             createdFrom.Add(RequiredMaterial);
         }
-        RequiredZone = SO.RequiredZone;
+        //RequiredZone = SO.RequiredZone;
         if (SO.RequiredAction != null) RequiredAction = new Action(SO.RequiredAction);
         if (SO.RequiredStoredMaterial != null)
         {
@@ -42,5 +43,6 @@ public class MapObject : HistoryItem
         RequiredStoredMaterialAmount = SO.RequiredStoredMaterialAmount;
         if (SO.HarvestedMaterial != null) HarvestedMaterial = new Material(SO.HarvestedMaterial);
         isFinalForm = SO.isFinalForm;
+        creationSound = SO.creationSound;
     }
 }

@@ -19,6 +19,6 @@ MonoBehaviour:
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  HarvestedMaterial: {fileID: 0}
   isFinalForm: 0
-  creationSound: {fileID: 8300000, guid: 860260e605e035a408e68f64e1ec440e, type: 3}
+  creationSound: {fileID: 8300000, guid: 4b687f9f365cf1642bb430d9b5c7320b, type: 3}
+  particleSystem: {fileID: 0}

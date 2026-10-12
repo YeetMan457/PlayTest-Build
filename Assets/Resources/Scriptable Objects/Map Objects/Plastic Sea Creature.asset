@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Plastic Sea Creature
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Plastic Sea Creature
-  image: {fileID: 21300000, guid: 58f8064b1199f114d9c7ea85dc9be728, type: 3}
+  image: {fileID: 21300000, guid: 5864a2d15902ae643898860181091250, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 9c665b60cbf0316408cc841bf8d4129c, type: 2}
   RequiredMaterial: {fileID: 0}
-  RequiredZone: 1
   RequiredAction: {fileID: 11400000, guid: 46f58404d1233a749b6e8d9ef40a73b7, type: 2}
   RequiredStoredMaterial: {fileID: 11400000, guid: 38916ee7a3a046e45b80035c9d22e4af, type: 2}
   RequiredStoredMaterialAmount: 1
-  HarvestedMaterial: {fileID: 0}
   isFinalForm: 1
-  creationSound: {fileID: 0}
+  creationSound: {fileID: 8300000, guid: 855459756a6c0e04e8fa0ecd275579af, type: 3}
+  particleSystem: {fileID: 0}

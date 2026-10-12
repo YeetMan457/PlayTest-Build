@@ -13,11 +13,12 @@ public class MapDecoration : MonoBehaviour
     public PolygonCollider2D decorationArea;
     public bool movable = true;
     public MapObject mapObject;
-    private Vector3 dragStartPosition;
+    SphereCollider sphereCollider;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         propertyBlock = new MaterialPropertyBlock();
+        sphereCollider = GetComponent<SphereCollider>();
         Canvas canvas = GetComponentInChildren<Canvas>();
         if (canvas != null)
             canvas.worldCamera = Camera.main;
@@ -25,6 +26,7 @@ public class MapDecoration : MonoBehaviour
     private void Start()
     {
         SetHighlight(false);
+        image.sortingOrder = (int)(-spriteRenderer.bounds.min.y * 100);
     }
     private void Update()
     {
@@ -103,13 +105,7 @@ public class MapDecoration : MonoBehaviour
                 if (hit.collider.TryGetComponent(out MapDecoration mapDecoration))
                 {
                     ZoneManager.instance.ToggleRedZones(true);
-
-                    mouseOffset =
-                        mapDecoration.transform.position -
-                        GetMousePosition();
-
-                    mapDecoration.dragStartPosition =
-                        mapDecoration.transform.position;
+                    mouseOffset = mapDecoration.transform.position - GetMousePosition();
 
                     mapDecoration.IsMoving = true;
                 }
@@ -118,60 +114,62 @@ public class MapDecoration : MonoBehaviour
         
     }
 
-    private void MouseReleaseAction(
-        InputAction.CallbackContext context)
+    private void MouseReleaseAction(InputAction.CallbackContext context)
     {
-        if (IsMoving)
-        {
-            float distanceMoved =
-                Vector3.Distance(
-                    dragStartPosition,
-                    transform.position
-                );
-
-            if (distanceMoved > 0.01f)
-            {
-                string objectName =
-                    mapObject != null
-                        ? mapObject.Name
-                        : gameObject.name;
-
-                PlaytestAnalytics.Track(
-                    $"Move Decoration: {objectName}"
-                );
-            }
-        }
-
         IsMoving = false;
-
         ZoneManager.instance.ToggleRedZones(false);
     }
 
     private void Move()
     {
-        if (IsMoving)
+        if (!IsMoving)
+            return;
+
+        Vector3 newPosition = GetMousePosition() + mouseOffset;
+
+        if (!IsDecorationInsideIsland(newPosition, sphereCollider))
+            return;
+
+        if (!decorationArea.OverlapPoint(newPosition))
+            return;
+
+        Vector3 originalPosition = transform.position;
+        transform.position = newPosition;
+
+        bool blocked = false;
+
+        Collider[] colliders = Physics.OverlapSphere(
+            sphereCollider.bounds.center,
+            sphereCollider.bounds.extents.magnitude,
+            obstacleLayer
+        );
+
+        foreach (Collider collider in colliders)
         {
-            SphereCollider sphereCollider = GetComponent<SphereCollider>();
+            if (collider == sphereCollider)
+                continue;
 
-            float radius = sphereCollider.radius;
-            Vector3 newPosition = GetMousePosition() + mouseOffset;
-
-            if (!IsDecorationInsideIsland(newPosition, sphereCollider))
-                return;
-
-            Collider[] colliders = Physics.OverlapSphere(
-                newPosition,
-                radius,
-                obstacleLayer
-            );
-            if (!decorationArea.OverlapPoint(GetMousePosition() + mouseOffset))
-                return;
-
-
-            if (colliders.Length == 0 || (colliders.Length == 1 && colliders[0] == sphereCollider))
-                transform.position = GetMousePosition() + mouseOffset;
+            if (Physics.ComputePenetration(
+                sphereCollider,
+                transform.position,
+                transform.rotation,
+                collider,
+                collider.transform.position,
+                collider.transform.rotation,
+                out _,
+                out _))
+            {
+                blocked = true;
+                break;
+            }
         }
+
+        if (blocked)
+            transform.position = originalPosition;
+
+        image.sortingOrder = (int)(-spriteRenderer.bounds.min.y * 100);
     }
+
 
     private bool IsDecorationInsideIsland(
     Vector3 position,

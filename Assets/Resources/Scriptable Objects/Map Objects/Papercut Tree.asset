@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3cfd8af4af2144ca24d951c053c01e, type: 3}
+  m_Name: Papercut Tree
+  m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
+  Name: Papercut Tree
+  image: {fileID: 21300000, guid: 045ef07cfbdc8554eaaabdde2c7bd551, type: 3}
+  RequiredMapObject: {fileID: 11400000, guid: 849092affc70b2b418ed5348308860c7, type: 2}
+  RequiredMaterial: {fileID: 0}
+  RequiredAction: {fileID: 11400000, guid: d0beaf1549b6460439b032be2ec0c181, type: 2}
+  RequiredStoredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
+  RequiredStoredMaterialAmount: 1
+  isFinalForm: 1
+  creationSound: {fileID: 8300000, guid: 25376370a94672841b1c2247c504e001, type: 3}
+  particleSystem: {fileID: 0}

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Crab Trap
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Crab Trap
-  image: {fileID: 21300000, guid: 99edd7161bdd18e4a9a2cfbc8a4a21b8, type: 3}
+  image: {fileID: 21300000, guid: 3183da1039da82349ab1e72297025720, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: e38821334cde730489ebddc1e7fc32e9, type: 2}
   RequiredMaterial: {fileID: 0}
   RequiredAction: {fileID: 11400000, guid: c9e01db734bf7704bb2bd947f2e60f77, type: 2}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  HarvestedMaterial: {fileID: 0}
   isFinalForm: 1
-  creationSound: {fileID: 0}
+  creationSound: {fileID: 8300000, guid: 25754b6d3106e7149a5d6b4a73433108, type: 3}
+  particleSystem: {fileID: 0}

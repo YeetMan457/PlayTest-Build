@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Plastic Table Set
   m_EditorClassIdentifier: Assembly-CSharp::MapObjectSO
   Name: Plastic Table Set
-  image: {fileID: 21300000, guid: 042074c220650854cae59ac0d7b41302, type: 3}
+  image: {fileID: 21300000, guid: 557f1aa300008894891afcfb0aa9e29a, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: 9c665b60cbf0316408cc841bf8d4129c, type: 2}
   RequiredMaterial: {fileID: 0}
-  RequiredZone: 1
   RequiredAction: {fileID: 11400000, guid: 46f58404d1233a749b6e8d9ef40a73b7, type: 2}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  HarvestedMaterial: {fileID: 0}
   isFinalForm: 1
   creationSound: {fileID: 8300000, guid: 855459756a6c0e04e8fa0ecd275579af, type: 3}
+  particleSystem: {fileID: 0}

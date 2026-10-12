@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Forged Iron
   m_EditorClassIdentifier: 
   Name: Forged Iron
-  image: {fileID: 21300000, guid: 7e38d2a77ad88e3438be30c32efaab9e, type: 3}
+  image: {fileID: 21300000, guid: eeceb0ee4e571964195c53862b22bdfc, type: 3}
   RequiredMapObject: {fileID: 11400000, guid: b7ccfde2dcfe75e4d89235b07a486bff, type: 2}
   RequiredMaterial: {fileID: 11400000, guid: d1554dd5f89da0c4797bd0c1d3f30ac9, type: 2}
   RequiredAction: {fileID: 0}
   RequiredStoredMaterial: {fileID: 0}
   RequiredStoredMaterialAmount: 0
-  HarvestedMaterial: {fileID: 0}
   isFinalForm: 0
   creationSound: {fileID: 8300000, guid: 25754b6d3106e7149a5d6b4a73433108, type: 3}
+  particleSystem: {fileID: 0}

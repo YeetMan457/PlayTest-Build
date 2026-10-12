@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2977066722216189832}
   - component: {fileID: 5850569740846076072}
   - component: {fileID: 1703738821133180225}
+  - component: {fileID: 7456721388696434662}
   m_Layer: 0
   m_Name: Map Object
   m_TagString: Untagged
@@ -37,6 +38,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8595741832718037504}
+  - {fileID: 8700705209866621183}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8118577665880505736
@@ -55,8 +57,10 @@ MonoBehaviour:
   popup: {fileID: 1962267432593792244}
   highlight: {fileID: 306392403913135869}
   creationAnimation: {fileID: 2977066722216189832}
-  idleAnimation: {fileID: 0}
+  poofAnimation: {fileID: 5277791632402428082}
+  idleAnimation: {fileID: 5850569740846076072}
   zone: {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!114 &306392403913135869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +119,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1126954459
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
@@ -124,7 +128,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.24, y: 2.24}
+  m_Size: {x: 2.22, y: 2.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -150,17 +154,64 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
   playOnAwake: 1
-  animationMode: 0
+  animationMode: 1
   components:
   - rid: 7970485387106713668
+  - rid: 44189509376802884
+  - rid: 7970485748862550082
   references:
     version: 2
     RefIds:
+    - rid: 44189509376802884
+      type: {class: SpriteRendererColorAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Color
+        enabled: 1
+        target: {fileID: 4746859858784275437}
+        settings:
+          startValue: {r: 1, g: 1, b: 1, a: 0}
+          endValue: {r: 1, g: 1, b: 1, a: 1}
+          duration: 0.5
+          ease: 0
+          customEaseCurve:
+            serializedVersion: 2
+            m_Curve:
+            - serializedVersion: 3
+              time: 0
+              value: 0
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            - serializedVersion: 3
+              time: 1
+              value: 1
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+              weightedMode: 0
+              inWeight: 0
+              outWeight: 0
+            m_PreInfinity: 2
+            m_PostInfinity: 2
+            m_RotationOrder: 4
+          delay: 0.15
+          delayType: 0
+          loops: 1
+          loopType: 0
+          cancelOnError: 0
+          skipValuesDuringDelay: 0
+          immediateBind: 1
+          schedulerType: 0
+          additionalSettings: 1
+        relative: 0
     - rid: 7970485387106713668
       type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
       data:
         displayName: Scale
-        enabled: 1
+        enabled: 0
         target: {fileID: 4679307523171237192}
         settings:
           startValue: {x: 0.25, y: 0.25, z: 0.25}
@@ -198,9 +249,15 @@ MonoBehaviour:
           cancelOnError: 0
           skipValuesDuringDelay: 0
           immediateBind: 0
-          schedulerType: 0
+          schedulerType: 1
           additionalSettings: 1
         relative: 0
+    - rid: 7970485748862550082
+      type: {class: PlayLitMotionAnimationComponent, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
+      data:
+        displayName: Play LitMotion Animation
+        enabled: 1
+        target: {fileID: 5850569740846076072}
 --- !u!114 &5850569740846076072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,12 +265,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189570919954901242}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 1
+  playOnAwake: 0
   animationMode: 0
   components:
   - rid: 7970485472784547905
@@ -227,7 +284,7 @@ MonoBehaviour:
         enabled: 1
         target: {fileID: 4679307523171237192}
         settings:
-          startValue: {x: 1, y: 0.9, z: 1}
+          startValue: {x: 1, y: 1, z: 1}
           endValue: {x: 1, y: 1.1, z: 1}
           duration: 2
           ease: 6
@@ -263,7 +320,7 @@ MonoBehaviour:
           skipValuesDuringDelay: 0
           immediateBind: 0
           schedulerType: 0
-          additionalSettings: 0
+          additionalSettings: 1
         relative: 0
 --- !u!65 &1703738821133180225
 BoxCollider:
@@ -284,8 +341,144 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 0}
+  m_Size: {x: 2, y: 2, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!95 &7456721388696434662
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189570919954901242}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad2f58802a405ae4697a3a739d938098, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &943465216211224871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8700705209866621183}
+  - component: {fileID: 7293233570175033603}
+  - component: {fileID: 5277791632402428082}
+  m_Layer: 0
+  m_Name: Poof
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8700705209866621183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943465216211224871}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.527, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4679307523171237192}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &7293233570175033603
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943465216211224871}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: -1126954459
+  m_SortingLayer: 1
+  m_SortingOrder: 5
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &5277791632402428082
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943465216211224871}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f93f3bcc075a449448f020141df57b8c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7400171329153206206
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,7 +538,7 @@ Canvas:
   m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1126954459
   m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &3014144300480621733
@@ -383,11 +576,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 927939534350239450, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1422019620870173747, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 74.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552255548735994081, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e40143f5754b2bb458a4013e2b9c2bb1, type: 3}
+    - target: {fileID: 1552255548735994081, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1774459383515614177, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -420,6 +621,10 @@ PrefabInstance:
     - target: {fileID: 2288553447839147498, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3165643206724216776, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3165643206724216776, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: managedReferences[7970485387106713668].target
@@ -533,6 +738,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3522662240939420839, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4876128390638419341, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5102629672025202431, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -553,21 +766,51 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 5388710271953645697, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6437278603157529091, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: recycle
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: actionAnimation
       value: 
-      objectReference: {fileID: 6507242421520166588}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: historyAnimation
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853604054705232190, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e40143f5754b2bb458a4013e2b9c2bb1, type: 3}
+    - target: {fileID: 9041479580230975533, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106913138592597580, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e40143f5754b2bb458a4013e2b9c2bb1, type: 3}
+    m_RemovedComponents:
+    - {fileID: 3165643206724216776, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+    - {fileID: 6792639180810452353, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 446429484435307387, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6437278603157529091, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6507242421520166588}
+      addedObject: {fileID: 2417469048713984354}
+    - targetCorrespondingSourceObject: {fileID: 5102629672025202431, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3381474444008969495}
   m_SourcePrefab: {fileID: 100100000, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
 --- !u!114 &1962267432593792244 stripped
 MonoBehaviour:
@@ -580,12 +823,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6cfdef67b2fa3145b83ab856cb2827a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPopup
+--- !u!1 &2924852476079347919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5102629672025202431, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+  m_PrefabInstance: {fileID: 7946328254872258096}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3381474444008969495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924852476079347919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0.25, y: 0.25, z: 0.25}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 14
 --- !u!1 &3968456025742435379 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6437278603157529091, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
   m_PrefabInstance: {fileID: 7946328254872258096}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6507242421520166588
+--- !u!114 &2417469048713984354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -594,69 +858,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3968456025742435379}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 1
-  animationMode: 0
-  components:
-  - rid: 7970485387106713668
-  references:
-    version: 2
-    RefIds:
-    - rid: 7970485387106713668
-      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
-      data:
-        displayName: Scale
-        enabled: 1
-        target: {fileID: 8396025937555426943}
-        settings:
-          startValue: {x: 0.25, y: 0.25, z: 0.25}
-          endValue: {x: 1, y: 1, z: 1}
-          duration: 0.5
-          ease: 14
-          customEaseCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          delay: 0
-          delayType: 0
-          loops: 1
-          loopType: 0
-          cancelOnError: 0
-          skipValuesDuringDelay: 0
-          immediateBind: 0
-          schedulerType: 0
-          additionalSettings: 1
-        relative: 0
+  m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0.25, y: 0.25, z: 0.25}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 14
 --- !u!224 &4794758199355542794 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3228342473264007994, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
-  m_PrefabInstance: {fileID: 7946328254872258096}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &8396025937555426943 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1928572435150047311, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
   m_PrefabInstance: {fileID: 7946328254872258096}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &8567854311739035089 stripped

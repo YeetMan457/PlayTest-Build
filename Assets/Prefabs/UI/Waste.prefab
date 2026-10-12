@@ -54,8 +54,10 @@ MonoBehaviour:
   popup: {fileID: 1962267432593792244}
   highlight: {fileID: 306392403913135869}
   creationAnimation: {fileID: 0}
+  poofAnimation: {fileID: 0}
   idleAnimation: {fileID: 0}
   zone: {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!114 &306392403913135869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,8 +116,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1126954459
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 0}
@@ -192,7 +194,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.75
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!1 &7400171329153206206
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +254,7 @@ Canvas:
   m_UseReflectionProbes: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1126954459
   m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &3014144300480621733
@@ -348,10 +350,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3165643206724216776, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
-      propertyPath: managedReferences[7970485387106713668].target
-      value: 
-      objectReference: {fileID: 8567854311739035089}
     - target: {fileID: 3228342473264007994, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -460,6 +458,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3522662240939420839, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4876128390638419341, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -505,6 +507,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: history
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: actionAnimation
       value: 
       objectReference: {fileID: 0}
@@ -515,16 +525,22 @@ PrefabInstance:
     - target: {fileID: 8465738874341923524, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       propertyPath: recycleAnimation
       value: 
-      objectReference: {fileID: 5380287012771266623}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853604054705232190, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e40143f5754b2bb458a4013e2b9c2bb1, type: 3}
     m_RemovedComponents:
     - {fileID: 7966514499735956442, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
     - {fileID: 3165643206724216776, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5102629672025202431, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
+    - {fileID: 6437278603157529091, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 446429484435307387, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5380287012771266623}
+      addedObject: {fileID: 1749378906566146673}
   m_SourcePrefab: {fileID: 100100000, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
 --- !u!114 &1962267432593792244 stripped
 MonoBehaviour:
@@ -547,7 +563,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 446429484435307387, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
   m_PrefabInstance: {fileID: 7946328254872258096}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5380287012771266623
+--- !u!114 &1749378906566146673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -556,68 +572,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7526937962031447371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 1
-  animationMode: 0
-  components:
-  - rid: 7970485387106713668
-  references:
-    version: 2
-    RefIds:
-    - rid: 7970485387106713668
-      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
-      data:
-        displayName: Scale
-        enabled: 1
-        target: {fileID: 9077849739543032323}
-        settings:
-          startValue: {x: 0.25, y: 0.25, z: 0.25}
-          endValue: {x: 1, y: 1, z: 1}
-          duration: 0.5
-          ease: 14
-          customEaseCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          delay: 0
-          delayType: 0
-          loops: 1
-          loopType: 0
-          cancelOnError: 0
-          skipValuesDuringDelay: 0
-          immediateBind: 0
-          schedulerType: 0
-          additionalSettings: 1
-        relative: 0
---- !u!224 &8567854311739035089 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1774459383515614177, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
-  m_PrefabInstance: {fileID: 7946328254872258096}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &9077849739543032323 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1422019620870173747, guid: 0cd421aa71e24e24b92df13a18fd8274, type: 3}
-  m_PrefabInstance: {fileID: 7946328254872258096}
-  m_PrefabAsset: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation
+  startScale: {x: 0.25, y: 0.25, z: 1}
+  endScale: {x: 1, y: 1, z: 1}
+  duration: 0.5
+  ease: 14

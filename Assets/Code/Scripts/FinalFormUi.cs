@@ -16,29 +16,80 @@ public class FinalFormUi : MonoBehaviour
     public LitMotionAnimation expandAnimation;
     public LitMotionAnimation retractAnimation;
     public LitMotionAnimation hoverExpandAnimation;
+    public GameObject[] arrows;
 
-    void Start()
+    void Awake()
     {
-        //gameObject.SetActive(false);
+        EnsureInitialized();
+    }
+
+    private void EnsureInitialized()
+    {
+        // Prevent duplicate initialization.
+        if (finalFormButtonDictionary != null)
+            return;
+
         finalFormButtonDictionary = new();
-        foreach (MapObject mapObject in MapObjectDatabase.instance.MapObjectDictionary.Values)
+
+        foreach (MapObject mapObject
+            in MapObjectDatabase.instance.MapObjectDictionary.Values)
         {
             if (mapObject == MapObjectDatabase.instance.waste)
                 continue;
-            FinalFormButton button = Instantiate(FinalFormIconPrefab, FinalFormUI.transform);
-            button.image.sprite = mapObject.image;
-            TextMeshProUGUI text = button.GetComponentInChildren<TextMeshProUGUI>();
-            //text.text = mapObject.Name;
-            button.mapObject = mapObject;
-            finalFormButtonDictionary.Add(mapObject.Name, button);
-                      
+
+            FinalFormButton button =
+                Instantiate(
+                    FinalFormIconPrefab,
+                    FinalFormUI.transform
+                );
+
+            button.image.sprite =
+                mapObject.image;
+
+            TextMeshProUGUI text =
+                button.GetComponentInChildren<TextMeshProUGUI>();
+
+            button.mapObject =
+                mapObject;
+
+            finalFormButtonDictionary.Add(
+                mapObject.Name,
+                button
+            );
         }
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        Expand();
     }
 
     public void MarkItemAsComplete(string name)
     {
-        finalFormButtonDictionary[name].SetComplete();
+        EnsureInitialized();
 
+        if (finalFormButtonDictionary.TryGetValue(
+            name,
+            out FinalFormButton button))
+        {
+            if (button != null)
+            {
+                if (button.checkMark != null && !button.checkMark.activeSelf)
+            {
+                DataLogging.currentLog.finalFormsDiscovered++;
+            }
+            
+                button.SetComplete();
+            }
+        }
+        else
+        {
+            Debug.LogWarning(
+                $"[FINAL FORM UI] Could not find '{name}' " +
+                "in the final form button dictionary."
+            );
+        }
     }
 
     public void OnClick()
@@ -55,16 +106,6 @@ public class FinalFormUi : MonoBehaviour
         }                   
     }
 
-    public void OnMouseEnter()
-    {
-        
-
-    }
-
-    public void OnMouseExit()
-    {
-        
-    }
 
     public void Expand()
     {
@@ -72,6 +113,13 @@ public class FinalFormUi : MonoBehaviour
         expandAnimation.Stop();
         expandAnimation.Play();
         expanded = true;
+        foreach (GameObject obj in arrows)
+        {
+            Vector3 rotation = obj.transform.eulerAngles;
+            rotation.z = 180;
+            obj.transform.eulerAngles = rotation;
+
+        }
     }
 
     public void Retract()
@@ -79,30 +127,14 @@ public class FinalFormUi : MonoBehaviour
         retractAnimation.Stop();
         retractAnimation.Play();
         expanded = false;
+        foreach (GameObject obj in arrows)
+        {
+            Vector3 rotation = obj.transform.eulerAngles;
+            rotation.z = 0;
+            obj.transform.eulerAngles = rotation;
+
+        }
     }
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    hovering = true;
-    //    if (!expanded)
-    //    {
-    //        retractAnimation.Stop();
-    //        expandAnimation.Stop();
-    //        expandAnimation.Play();
-    //        expanded = true;
-    //    }
-    //}
-
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    hovering = false;
-
-    //    if (expanded)
-    //    {
-    //        retractAnimation.Stop();
-    //        retractAnimation.Play();
-    //        expanded = false;
-    //    }
-    //}
 }
 

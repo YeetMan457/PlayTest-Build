@@ -156,7 +156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8884275277896612663
 RectTransform:
   m_ObjectHideFlags: 0
@@ -344,8 +344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 100
-    m_Right: 200
+    m_Left: 0
+    m_Right: 0
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
@@ -420,8 +420,7 @@ GameObject:
   - component: {fileID: 3914609286974199641}
   - component: {fileID: 8723017272743726933}
   - component: {fileID: 5447990238995787474}
-  - component: {fileID: 8696247172614131279}
-  - component: {fileID: 393556587668714919}
+  - component: {fileID: 8468441018670857682}
   m_Layer: 5
   m_Name: History Window
   m_TagString: Untagged
@@ -469,13 +468,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfbdc45a24a9964abc3d6945e5d1069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectIcon: {fileID: 2702013613949639873, guid: 6f4a985935e353f49919304bcff2bcaa, type: 3}
+  historyItemPrefab: {fileID: 2702013613949639873, guid: 6f4a985935e353f49919304bcff2bcaa, type: 3}
   historyUI: {fileID: 8015597490890178603}
   arrow: {fileID: 2702013613949639873, guid: b3c50e853c4226d42ab9d233caace442, type: 3}
   historyBranch: {fileID: 151797809241941115, guid: 34d7c70145f95c54ea8a5e57d3cda4a8, type: 3}
   historyRow: {fileID: 151797809241941115, guid: 6e07c09992e02574698afa367ca4ea69, type: 3}
-  closeAnimation: {fileID: 393556587668714919}
---- !u!114 &8696247172614131279
+--- !u!114 &8468441018670857682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -484,122 +482,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8795607761758810681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 632c133b133d80c43aecebd8f4c7eeb7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 1
-  animationMode: 0
-  components:
-  - rid: 7970485387106713667
-  references:
-    version: 2
-    RefIds:
-    - rid: 7970485387106713667
-      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
-      data:
-        displayName: Scale
-        enabled: 1
-        target: {fileID: 9162998582488009754}
-        settings:
-          startValue: {x: 0, y: 1, z: 1}
-          endValue: {x: 1, y: 1, z: 1}
-          duration: 0.5
-          ease: 26
-          customEaseCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          delay: 0
-          delayType: 0
-          loops: 1
-          loopType: 1
-          cancelOnError: 0
-          skipValuesDuringDelay: 0
-          immediateBind: 0
-          schedulerType: 0
-          additionalSettings: 1
-        relative: 0
---- !u!114 &393556587668714919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8795607761758810681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc6819e64e4c44beb63ea2ef45e1a6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: LitMotion.Animation::LitMotion.Animation.LitMotionAnimation
-  playOnAwake: 0
-  animationMode: 0
-  components:
-  - rid: 7970485387106713667
-  references:
-    version: 2
-    RefIds:
-    - rid: 7970485387106713667
-      type: {class: TransformScaleAnimation, ns: LitMotion.Animation.Components, asm: LitMotion.Animation}
-      data:
-        displayName: Scale
-        enabled: 1
-        target: {fileID: 9162998582488009754}
-        settings:
-          startValue: {x: 1, y: 1, z: 1}
-          endValue: {x: 0, y: 1, z: 1}
-          duration: 0.5
-          ease: 25
-          customEaseCurve:
-            serializedVersion: 2
-            m_Curve:
-            - serializedVersion: 3
-              time: 0
-              value: 0
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            - serializedVersion: 3
-              time: 1
-              value: 1
-              inSlope: 0
-              outSlope: 0
-              tangentMode: 0
-              weightedMode: 0
-              inWeight: 0
-              outWeight: 0
-            m_PreInfinity: 2
-            m_PostInfinity: 2
-            m_RotationOrder: 4
-          delay: 0
-          delayType: 0
-          loops: 1
-          loopType: 1
-          cancelOnError: 0
-          skipValuesDuringDelay: 0
-          immediateBind: 0
-          schedulerType: 0
-          additionalSettings: 1
-        relative: 0
+  m_EditorClassIdentifier: Assembly-CSharp::MenuOpenAnimation

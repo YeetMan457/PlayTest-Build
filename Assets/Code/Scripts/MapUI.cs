@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class MapUI : MonoBehaviour
 {
-    public HistoryWindow historyWindow;
+    public HistoryWindow currentHistoryWindow;
     public GameObject optionsMenu;
     public ObjectSelectScreen objectSelectScreen;
-    public GameObject finalFormWindow;
-    bool finalFormWindowActive = false;
+    public FinalFormUi finalFormWindow;
     public static MapUI instance;
-    public GameObject blocker;
     public Canvas canvas;
+    public GameObject historyWindowReference;
     public HistoryWindow historyWindowPrefab;
 
     void Awake()
@@ -30,44 +29,22 @@ public class MapUI : MonoBehaviour
     }
     public void DisplayHistoryWindow(MapObject mapObject)
     {
-        if (historyWindow != null)
-            Destroy(historyWindow.gameObject);
-        //blocker.SetActive(true);
-        historyWindow = Instantiate(historyWindowPrefab, canvas.transform);
-        historyWindow.CreateHistory(mapObject);
+        if (currentHistoryWindow != null)
+            Destroy(currentHistoryWindow.gameObject);
+        currentHistoryWindow = Instantiate(historyWindowPrefab, historyWindowReference.transform);
+        currentHistoryWindow.CreateHistory(mapObject);
     }
 
     public void DisplayObjectSelectScreen(List<MapObject> mapObjects, Action<string> onSelected)
     {
-        blocker.SetActive(true);
         ObjectSelectScreen window = Instantiate(objectSelectScreen, canvas.transform);
         window.DisplayObjectChoices(mapObjects, onSelected);
+        GameManager.instance.menuOpen = true;
     }
 
     public void DisplayFinalFormWindow()
     {
-        if (finalFormWindowActive == false)
-        {
-            finalFormWindowActive = true;
-            finalFormWindow.SetActive(true);
-
-        }
+        finalFormWindow.Show();
         
-    }
-    public void DisplayOptionsMenu()
-    {
-        blocker.SetActive(true);
-        optionsMenu.SetActive(true);
-    }
-    public void HideFinalFormWindow()
-    {
-        if (finalFormWindowActive == true)
-        {
-            finalFormWindowActive = false;
-            finalFormWindow.SetActive(false);
-
-        }
-        
-
     }
 }

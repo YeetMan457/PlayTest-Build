@@ -10,13 +10,12 @@ public class MapObjectSO : ScriptableObject
     public Sprite image;
     public MapObjectSO RequiredMapObject;
     public MaterialSO RequiredMaterial;
-    //public ZoneEnum RequiredZone;
     public ActionSO RequiredAction;
     public MaterialSO RequiredStoredMaterial;
     public int RequiredStoredMaterialAmount;
-    public MaterialSO HarvestedMaterial;
     public bool isFinalForm = false;
     public AudioClip creationSound;
+    public GameObject particleSystem;
     
     
 }

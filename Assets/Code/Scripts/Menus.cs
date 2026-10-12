@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using LitMotion.Animation;
 
 public class Menus : MonoBehaviour
 {
@@ -11,13 +12,19 @@ public class Menus : MonoBehaviour
     [Header("MAIN MENUS")]
     public GameObject mainMenu;
     public GameObject helpMenu;
-    public GameObject optionsMenu;
+    public GameObject audioMenu;
     public GameObject gameMenu;
+    public GameObject restartMenu;
+    public GameObject creditsMenu;
+    public LitMotionAnimation creditsAnimation;
+    public GameStartTransition transitionEffect;
 
     [Header("SCENES")]
     public string gameScene = "Game";
     public string mainMenuScene = "MainMenu";
-    public string tutorialScene = "Tutorial";
+    public string galleryScene = "Gallery";
+
+    int currentSceneIndex;
 
     void Awake()
     {
@@ -40,6 +47,7 @@ public class Menus : MonoBehaviour
     void Update()
     {
         HandleEscapeKey();
+
     }
 
     // =========================================================
@@ -59,9 +67,9 @@ public class Menus : MonoBehaviour
         }
 
         // Options closes second
-        if (optionsMenu.activeSelf)
+        if (audioMenu.activeSelf)
         {
-            CloseOptionsMenu();
+            CloseAudioMenu();
             return;
         }
     }
@@ -72,16 +80,25 @@ public class Menus : MonoBehaviour
 
     public void StartGame()
     {
+        if (transitionEffect.transitionStarted)
+            return;
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(gameScene);
+        StopLitMotionAnimations();
+        transitionEffect.Animate();
+        
     }
 
-    public void StartTutorial()
+    public void StartGallery()
     {
+        if (transitionEffect.transitionStarted)
+            return;
+
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(tutorialScene);
+        StopLitMotionAnimations();
+
+        SceneManager.LoadScene(galleryScene);
     }
 
     public void QuitGame()
@@ -110,26 +127,87 @@ public class Menus : MonoBehaviour
 
     public void OpenHelpMenu()
     {
-        helpMenu.SetActive(true);
+        if (helpMenu == null)
+            return;
+
+        if (!helpMenu.activeSelf)
+        {
+            helpMenu.SetActive(true);
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.menuOpen = true;
+            }
+        }
     }
 
     public void CloseHelpMenu()
     {
+        if (helpMenu == null)
+            return;
+
         helpMenu.SetActive(false);
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.menuOpen = false;
+        }
+    }
+
+    // =========================================================
+    // RESTART MENU
+    // =========================================================
+
+    public void OpenRestartMenu()
+    {
+        if (!restartMenu.activeSelf)
+        {
+            restartMenu.SetActive(true);
+            GameManager.instance.menuOpen = true;
+        }
+        
+    }
+
+    public void CloseRestartMenu()
+    {
+        restartMenu.SetActive(false);
+        GameManager.instance.menuOpen = false;
     }
 
     // =========================================================
     // OPTIONS
     // =========================================================
 
-    public void OpenOptionsMenu()
+    public void OpenAudioMenu()
     {
-        optionsMenu.SetActive(true);
+        if (!audioMenu.activeSelf)
+        {
+            audioMenu.SetActive(true);
+        }
+        
     }
 
-    public void CloseOptionsMenu()
+    public void CloseAudioMenu()
     {
-        optionsMenu.SetActive(false);
+        audioMenu.SetActive(false);
+    }
+
+    // =========================================================
+    // CREDITS MENU
+    // =========================================================
+
+    public void OpenCreditsMenu()
+    {
+        if (transitionEffect.transitionStarted)
+            return;
+
+        creditsMenu.SetActive(true);
+        creditsAnimation.Restart();
+    }
+
+    public void CloseCreditsMenu()
+    {
+        creditsMenu.SetActive(false);
     }
 
     // =========================================================
@@ -140,6 +218,8 @@ public class Menus : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        StopLitMotionAnimations();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
@@ -148,6 +228,8 @@ public class Menus : MonoBehaviour
     {
         Time.timeScale = 1f;
 
+        StopLitMotionAnimations();
+
         SceneManager.LoadScene(mainMenuScene);
     }
 
@@ -155,11 +237,29 @@ public class Menus : MonoBehaviour
     {
         if (mainMenu != null) mainMenu.SetActive(false);
         if (helpMenu != null) helpMenu.SetActive(false);
-        if (optionsMenu != null) optionsMenu.SetActive(false);
+        if (audioMenu != null) audioMenu.SetActive(false);
+        if (creditsMenu != null) creditsMenu.SetActive(false);
     }
 
     void OnDestroy()
     {
         Time.timeScale = 1f;
+    }
+
+    private void StopLitMotionAnimations()
+    {
+        LitMotionAnimation[] animations =
+            FindObjectsByType<LitMotionAnimation>(
+                FindObjectsInactive.Include,
+                FindObjectsSortMode.None
+            );
+
+        foreach (LitMotionAnimation animation in animations)
+        {
+            if (animation != null && animation.IsPlaying)
+            {
+                animation.Stop();
+            }
+        }
     }
 }

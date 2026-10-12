@@ -8,9 +8,6 @@ public class ObjectPopup : MonoBehaviour
     public GameObject history;
     public GameObject recycle;
     public GameObject action;
-    public LitMotionAnimation historyAnimation;
-    public LitMotionAnimation actionAnimation;
-    public LitMotionAnimation recycleAnimation;
 
     private System.Action onHistory;
     private System.Action onAction;
@@ -34,34 +31,16 @@ public class ObjectPopup : MonoBehaviour
             action.GetComponentInChildren<TextMeshProUGUI>().text = actionText;
         }
 
-        else
-        {
-            action.SetActive(false);
-        }
-        if (historyAnimation != null)
-        {
-            historyAnimation.Stop();
-            historyAnimation.Play();
-        }
-        if (actionAnimation != null)
-        {
-            actionAnimation.Stop();
-            actionAnimation.Play();
-        }
-
-        if (recycleAnimation != null)
-        {
-            recycleAnimation.Stop();
-            recycleAnimation.Play();
-        }
-
-
     }
 
     public void Disable()
     {
-        action.GetComponentInChildren<TextMeshProUGUI>().text = null;
-        action.SetActive(false);
+        if (action != null)
+        {
+            action.GetComponentInChildren<TextMeshProUGUI>().text = null;
+            action.SetActive(false);
+        }
+        
         gameObject.SetActive(false);
 
         onHistory = null;

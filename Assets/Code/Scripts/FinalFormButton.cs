@@ -23,8 +23,14 @@ public class FinalFormButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnClick()
     {
         hovering = false;
-        MapUI.instance.DisplayHistoryWindow(mapObject);
-        hoverPopup.SetActive(false);
+        if (MapUI.instance.currentHistoryWindow != null && MapUI.instance.currentHistoryWindow.targetMapObject == mapObject)
+            MapUI.instance.currentHistoryWindow.CloseWindow();
+        else
+        {
+            MapUI.instance.DisplayHistoryWindow(mapObject);
+            hoverPopup.SetActive(false);
+        }
+        
     }
 
     public void SetComplete()

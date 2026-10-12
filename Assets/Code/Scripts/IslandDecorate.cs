@@ -22,12 +22,9 @@ public class IslandDecorate : MonoBehaviour
         else
             obj = Instantiate(decorationPrefab);
     
-        MapDecoration decoration =
-            obj.GetComponent<MapDecoration>();
-
+        MapDecoration decoration = obj.GetComponent<MapDecoration>();
         decoration.decorationArea = area;
 
-        // ANALYTICS / identity
         decoration.mapObject = mapObject;
 
         decoration.image.sprite = mapObject.image;

@@ -31,14 +31,14 @@ public class ObjectSelectScreen : MonoBehaviour
     private void SelectObject(string objectName)
     {
         onSelected?.Invoke(objectName);
-        MapUI.instance.blocker.SetActive(false);
+        GameManager.instance.menuOpen = false;
         Destroy(this.gameObject);
     }
 
     public void OnCloseButtonClick()
     {
         onSelected?.Invoke(null);
-        MapUI.instance.blocker.SetActive(false);
+        GameManager.instance.menuOpen = false;
         Destroy(this.gameObject);
     }
 }

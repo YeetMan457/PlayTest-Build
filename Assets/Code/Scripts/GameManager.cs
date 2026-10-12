@@ -15,14 +15,11 @@ public class GameManager : MonoBehaviour
     public int currentRecycledWaste;
     public StorageUI storageUi;
     public InputTracker inputTracker;
-    public Stack<(MapObject, Zone)> objectHistory = new();
     public CurrentAction currentAction;
     
     public List<AudioClip> gameMusic;
-    public HashSet<string> goalItems = new();
-    public HashSet<string> completedGoalItems = new();
-    public bool goalItemsFinished = false;
-    public GoalItemUI goalItemUI;
+    public bool menuOpen = false;
+    public float wasteWeight = 50;
 
     [SerializeField] private InputAction mouseClick;
     [HideInInspector] public bool IsMoving = false;
@@ -39,18 +36,15 @@ public class GameManager : MonoBehaviour
 
 
     }
+    
     void Start()
     {
-        AudioManager.instance.ChangeMusic(SceneManager.GetActiveScene());
     }
+
     void Update()
     {
         if (inputTracker.TimeSinceLastInput > inputTracker.ResetTimer)
         {
-            PlaytestAnalytics.Track(
-                "System: Inactivity Reset"
-            );
-
             ResetScene();
         }
 
@@ -92,6 +86,7 @@ public class GameManager : MonoBehaviour
     }
     public void ResetScene()
     {
+        TutorialPromptManager.Instance.ResetTutorialSession();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -109,22 +104,8 @@ public class GameManager : MonoBehaviour
         storageUi.ChangeStorageAmount();
     }
 
-    internal void AddCompletedItem(string name)
-    {
-        if (!completedGoalItems.Contains(name))
-        {
-            completedGoalItems.Add(name);
-            Destroy(goalItemUI.finalFormButtons[name].gameObject);
-            if (completedGoalItems.Count == goalItems.Count)
-            {
-                goalItemsFinished = true;
-                goalItemUI.CreateFinalItems();
-            }
-                
-        }
-    }
 
-    public void RecycleItem(Material material, GameObject gameObject)
+    public void RecycleItem(GameObject gameObject)
     {
         TextPopup popup = Popup.instance.ShowText(gameObject, $"+1 <sprite name=\"Waste edit\">");
         ChangeStoredMaterialAmount(1);     

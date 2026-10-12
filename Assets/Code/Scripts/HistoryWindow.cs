@@ -4,6 +4,7 @@ using LitMotion.Animation.Components;
 using LitMotion.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
@@ -13,34 +14,26 @@ using UnityEngine.UI;
 
 public class HistoryWindow : MonoBehaviour
 {
-    public GameObject objectIcon;
+    public GameObject historyItemPrefab;
     public GameObject historyUI;
     public GameObject arrow;
     public GameObject historyBranch;
     public GameObject historyRow;
-    public LitMotionAnimation closeAnimation;
     private readonly Dictionary<HistoryItem, HistoryEntry> historyEntries = new();
     bool closing = false;
-    MapObject targetMapObject;
+    public MapObject targetMapObject;
 
-    public void OnClick()
+    public void CloseWindow()
     {
         if (!closing)
         {
             closing = true;
-            closeAnimation.Play();
             
         }   
     }
-
-    public void Update()
+    void OnEnable()
     {
-        if (closing && !closeAnimation.IsPlaying)
-        {
-            Destroy(this.gameObject);
-            //MapUI.instance.blocker.SetActive(false);
-        }
-        
+        //GetComponent<MenuOpenAnimation>().PlayOpenAnimation();
     }
 
     internal void CreateHistory(MapObject mapObject)
@@ -52,10 +45,17 @@ public class HistoryWindow : MonoBehaviour
 
     internal void CreatePreviousHistory(HistoryItem historyItem, Transform parent, bool discovered, int? requiredStoredMaterialAmount = 0)
     {
-        GameObject icon = Instantiate(objectIcon, parent);
+        GameObject icon = Instantiate(historyItemPrefab, parent);
 
         TextMeshProUGUI text = icon.GetComponentInChildren<TextMeshProUGUI>();
-        Image image = icon.GetComponent<Image>();
+        Image image = null;
+        foreach (Transform child in icon.transform)
+        {
+            image = child.GetComponentInChildren<Image>();
+            if (image != null)
+                break;
+        }
+            
 
         historyEntries.Add(historyItem, new HistoryEntry
         {
